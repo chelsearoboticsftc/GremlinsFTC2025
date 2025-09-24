@@ -61,7 +61,7 @@ public final class LookupTable {
     }
 
     /**
-     * Interpolates (or extrapolates) output for the given input.
+     * Interpolates output for the given input.
      */
 
     public double interpolate(double input) {
