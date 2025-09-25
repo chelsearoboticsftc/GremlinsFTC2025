@@ -45,27 +45,15 @@ public final class LookupTable {
         }
     }
 
-    private int closestIndex(double input) {
-        // https://developer.android.com/reference/java/util/Arrays#binarySearch(byte[],%20int,%20int,%20byte)
-        int idx = Arrays.binarySearch(inputs, input);
-        if (idx >= 0) return idx;
-        else return -idx - 1;
-    }
-
-    /**
-     * Finds the closest output value for the given input.
-     */
-
-    public double closestValue(double input) {
-        return outputs[closestIndex(input)];
-    }
-
     /**
      * Interpolates output for the given input.
      */
 
     public double interpolate(double input) {
-        int index = closestIndex(input);
+        // find closest input higher than the given input
+        // https://developer.android.com/reference/java/util/Arrays#binarySearch(byte[],%20int,%20int,%20byte)
+        int index = Arrays.binarySearch(inputs, input);
+        if (index < 0) index = -index - 1;
 
         int n = inputs.length;
         // Exact matches on boundaries or within
@@ -87,10 +75,6 @@ public final class LookupTable {
             return y0 + fraction * deltaY;
         }
     }
-
-    public int size() { return inputs.length; }
-    public double minInput() { return inputs[0]; }
-    public double maxInput() { return inputs[inputs.length - 1]; }
 
     // Convenience builder from primitive arrays (must be same length)
     public static LookupTable fromArrays(double[] inputs, double[] outputs) {

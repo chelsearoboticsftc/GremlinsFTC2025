@@ -56,28 +56,6 @@ public class SmartShooter {
         //motorName.setTargetPosition(motorSetPosition);
     }
 
-    public void setMotorPosition(int position){
-        //Call setTargetPositionTolerance to tell REV controller how close to the target position
-        //can be considered "at" the target position (e.g. target position +/- tolerance)
-        motor.setTargetPositionTolerance(SmartShooterConstants.POSITION_TOLERANCE);
-
-        //Call setVelocity to tell the REV controller how fast you want to get to the target position
-        motor.setVelocity(SmartShooterConstants.VELOCITY_TICKS_PER_S);
-
-        //Call setTargetPosition to tell the REV controller the position you want to move to
-        motor.setTargetPosition(position);
-
-        //Call setMode(DcMotor.RunMode.RUN_TO_POSITION) to tell the REV controller you're ready to
-        //move to position
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
-
-    //Use convention "set<Parameter>" to name methods which set something. Example set<motorName>Power
-    public void setMotorPower(double power){
-        //Note: Calling setPower stops position and Velocity control!!!!
-        motor.setPower(power);
-    }
-
     public void shoot(double distance) {
         double velocity = distanceToVelocity.interpolate(distance);
         this.motor.setVelocity(velocity);
