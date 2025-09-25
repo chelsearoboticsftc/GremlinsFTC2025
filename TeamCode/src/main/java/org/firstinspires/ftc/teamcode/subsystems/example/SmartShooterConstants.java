@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.utils.LookupTable.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SmartShooterConstants {
@@ -16,10 +15,6 @@ public class SmartShooterConstants {
     public static final double VELOCITY_I = 0.0;
     public static final double VELOCITY_D = 0.0;
     public static final double VELOCITY_F = 14.5;
-    public static final int POSITION_TOLERANCE = 5;
-    public static final double VELOCITY_TICKS_PER_S = 2200;
-    public static final int A_POSITION = 500;
-    public static final int B_POSITION = 1000;
     public static double POSITION_P = 5.0;
     public static final List<Pair> LOOKUP_TABLE = List.of(
         // Create list of distance / velocity pairs by calibrating your shooter
