@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+
 @TeleOp
 public class BasicTeleopDrive extends LinearOpMode {
     @Override
@@ -16,13 +17,18 @@ public class BasicTeleopDrive extends LinearOpMode {
 
         waitForStart();
 
-        while(opModeIsActive()){
 
+        while(opModeIsActive()){
+            double speedFactor = 1 - gamepad1.right_trigger + 0.2;
             drive.setDrivePowers(
-                    new PoseVelocity2d(
-                            new Vector2d(-gamepad1.left_stick_y,
-                                         -gamepad1.left_stick_x),
-                            -gamepad1.right_stick_x));
+                new PoseVelocity2d(
+                    new Vector2d(
+                        -gamepad1.left_stick_y * speedFactor,
+                        -gamepad1.left_stick_x * speedFactor
+                    ),
+                    -gamepad1.right_stick_x
+                )
+            );
         }
     }
 }
