@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 public class ShooterCalibrator extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        shooter = new SmartShooter(hardwareMap);
+        SmartShooter shooter = new SmartShooter(hardwareMap);
 
         waitForStart();
 
