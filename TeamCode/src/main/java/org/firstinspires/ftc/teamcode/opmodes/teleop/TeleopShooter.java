@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.example.SampleSubsystemConstants;
 import org.firstinspires.ftc.teamcode.subsystems.example.shooter;
-
+@TeleOp
 public abstract class TeleopShooter extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException{
