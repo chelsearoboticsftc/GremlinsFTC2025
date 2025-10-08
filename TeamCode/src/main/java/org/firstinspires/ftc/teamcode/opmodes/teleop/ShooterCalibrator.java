@@ -12,7 +12,7 @@ public class ShooterCalibrator extends LinearOpMode {
 
         waitForStart();
 
-        double step = 0.1;
+        double step = 10;
         double velocity = 0;
 
         while(opModeIsActive()){
@@ -21,7 +21,7 @@ public class ShooterCalibrator extends LinearOpMode {
                 velocity += step;
             }
             // B button presses reset velocity to 0
-            if (gamepad2.bWasPressed()) {
+            if (gamepad1.bWasPressed()) {
                 velocity = 0;
             }
             shooter.setMotorVelocity(velocity);

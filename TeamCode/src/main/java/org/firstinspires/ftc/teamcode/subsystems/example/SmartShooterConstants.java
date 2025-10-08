@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SmartShooterConstants {
     // Note - any changes to these constants will require recalibration!
-    public static final String MOTOR_NAME = "shooter";
+    public static final String MOTOR_NAME = "shooterLeft";
     public static final DcMotor.ZeroPowerBehavior ZERO_POWER_BEHAVIOR = DcMotor.ZeroPowerBehavior.BRAKE;
     public static final DcMotorSimple.Direction MOTOR_DIRECTION = DcMotorSimple.Direction.REVERSE;
     public static final double VELOCITY_P = 1.0;
