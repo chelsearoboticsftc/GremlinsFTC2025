@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 public class TeleopCommon extends LinearOpMode {
@@ -19,6 +21,8 @@ public class TeleopCommon extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0,0));
+        SmartShooter shooter = new SmartShooter(hardwareMap);
+        Intake intake = new Intake(hardwareMap);
 
         waitForStart();
 
@@ -28,12 +32,19 @@ public class TeleopCommon extends LinearOpMode {
             drive.setDrivePowers(
                 new PoseVelocity2d(
                     new Vector2d(
-                        -gamepad1.left_stick_y * speedFactor,
-                        -gamepad1.left_stick_x * speedFactor
-                    ),
-                    -gamepad1.right_stick_x
-                )
-            );
+                        gamepad1.left_stick_y * speedFactor,
+                        gamepad1.left_stick_x * speedFactor),
+                    gamepad1.right_stick_x
+                    )
+                );
+            if(gamepad1.right_bumper){
+                shooter.shoot(10 );
+            }
+
+            if(gamepad1.left_bumper){
+                intake.setMotorPower(0.5);
+                
+            }
         }
     }
 }
