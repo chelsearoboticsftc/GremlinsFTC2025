@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
@@ -18,6 +19,10 @@ public class TestForKirk extends LinearOpMode {
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
        // DcMotorEx shooterLeft = hardwareMap.get(DcMotorEx.class, "shooterLeft");
         DcMotorEx shooterRight = hardwareMap.get(DcMotorEx.class, "shooterRight");
+        Servo upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
+        Servo upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
+        upperRightGate.setDirection(Servo.Direction.REVERSE);
+
         boolean shooterOn = false;
         waitForStart();
 
@@ -35,7 +40,7 @@ public class TestForKirk extends LinearOpMode {
             );
 
 
-            if (this.gamepad1.rightBumperWasPressed()) {
+            if (this.gamepad2.bWasPressed()) {
                 if (!shooterOn) {
                     shooterRight.setPower(-1);
                     shooterOn = true;
@@ -45,12 +50,29 @@ public class TestForKirk extends LinearOpMode {
                 }
             }
 
-
-
-            if (this.gamepad1.a)
+            if (this.gamepad2.a)
                 intake.setPower(-1);
             else
                 intake.setPower(0);
+
+            if (gamepad2.left_bumper){
+                upperLeftGate.setPosition(0.65);
+            }
+
+            if(gamepad2.left_trigger > 0.1){
+                upperLeftGate.setPosition(1);
+            }
+
+            if (gamepad2.right_bumper){
+                upperRightGate.setPosition(0.4);
+            }
+
+            if(gamepad2.right_trigger > 0.1){
+                upperRightGate.setPosition(0.5);
+            }
+            this.telemetry.addData("left Servo", upperLeftGate.getPosition());
+            this.telemetry.addData("right Servo", upperRightGate.getPosition());
+            this.telemetry.update();
 
         }
 
