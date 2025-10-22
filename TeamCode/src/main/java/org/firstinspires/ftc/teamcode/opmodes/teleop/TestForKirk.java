@@ -21,7 +21,6 @@ public class TestForKirk extends LinearOpMode {
         DcMotorEx shooterRight = hardwareMap.get(DcMotorEx.class, "shooterRight");
         Servo upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
         Servo upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
-        upperRightGate.setDirection(Servo.Direction.REVERSE);
 
         boolean shooterOn = false;
         waitForStart();
@@ -55,6 +54,7 @@ public class TestForKirk extends LinearOpMode {
             else
                 intake.setPower(0);
 
+
             if (gamepad2.left_bumper){
                 upperLeftGate.setPosition(0.65);
             }
@@ -68,7 +68,7 @@ public class TestForKirk extends LinearOpMode {
             }
 
             if(gamepad2.right_trigger > 0.1){
-                upperRightGate.setPosition(0.5);
+                upperRightGate.setPosition(0.0);
             }
             this.telemetry.addData("left Servo", upperLeftGate.getPosition());
             this.telemetry.addData("right Servo", upperRightGate.getPosition());
