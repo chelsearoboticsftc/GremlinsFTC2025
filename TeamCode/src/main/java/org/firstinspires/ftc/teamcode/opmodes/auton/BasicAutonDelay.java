@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.opmodes.auton;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
-
-@Autonomous(name = "Drive Forward 10 Feet Delay 2 Sec", group = "Linear OpMode")
+@Disabled
+@Autonomous(name = "Drive Forward 2 Feet Delay 2 Sec", group = "Linear OpMode")
 public class BasicAutonDelay extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,7 +26,7 @@ public class BasicAutonDelay extends LinearOpMode {
         // We create an "action" to drive forward (along the X-axis) by 120 inches.
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .lineToX(120)
+                        .lineToX(24)
                         .build()
         );
     }
