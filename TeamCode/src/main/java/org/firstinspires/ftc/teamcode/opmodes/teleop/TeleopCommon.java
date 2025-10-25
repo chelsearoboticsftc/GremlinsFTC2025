@@ -45,10 +45,14 @@ public class TeleopCommon extends LinearOpMode {
                 shooter.setMotorVelocity(0);
             }
 
-            if(gamepad1.left_bumper){
+            if(gamepad1.left_bumper) {
                 intake.setMotorPower(0.5);
-                
+
             }
+                if(!gamepad1.left_bumper){
+                    intake.setMotorPower(0);
+                }
+
         }
     }
 }
