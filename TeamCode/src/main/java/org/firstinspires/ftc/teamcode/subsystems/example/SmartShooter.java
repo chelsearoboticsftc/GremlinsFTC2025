@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems.example;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.utils.LookupTable;
 
@@ -10,12 +11,17 @@ public class SmartShooter {
 
     //Example declare a DcMotorEx object as part of this class called 'motorName'
     DcMotorEx motor;
+    Servo upperLeftGate;
+    Servo upperRightGate;
 
     //Declare any other global variables for this class here
     private final LookupTable distanceToVelocity = new LookupTable(SmartShooterConstants.LOOKUP_TABLE);
 
     public SmartShooter(HardwareMap hardwareMap){
         this.motor = hardwareMap.get(DcMotorEx.class, SmartShooterConstants.MOTOR_NAME);
+        this.upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
+        this.upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
+        this.lowerGates();
 
         //This defines the behavior at zero power (brake or coast)
         motor.setZeroPowerBehavior(SmartShooterConstants.ZERO_POWER_BEHAVIOR);
@@ -56,11 +62,38 @@ public class SmartShooter {
         //motorName.setTargetPosition(motorSetPosition);
     }
 
+    public void raiseGates(){
+        upperLeftGate.setPosition(0.5);
+        upperRightGate.setPosition(0.4);
+    }
+
+    public void lowerGates(){
+        upperLeftGate.setPosition(1);
+        upperRightGate.setPosition(0.0);
+    }
     public void shoot(double distance) {
-        double velocity = distanceToVelocity.interpolate(distance);
-        this.setMotorVelocity(velocity);
+//        double velocity = distanceToVelocity.interpolate(distance);
+//        this.setMotorVelocity(velocity);
         // TODO - is ball already engaged, or does it need to be dropped,
         // maybe after a short delay to allow the motor to spin up?
+        this.motor.setPower(1);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
+        this.raiseGates();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
+        this.motor.setPower(0);
+        this.lowerGates();
+
+
+    }
+
+    public void setPower(double power) {
+        this.motor.setPower(power);
     }
 
     public void setMotorVelocity(double angularRate) {
