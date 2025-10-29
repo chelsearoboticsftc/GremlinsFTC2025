@@ -24,6 +24,8 @@ public class TestForKirk extends LinearOpMode {
         Servo upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
 
         boolean shooterOn = false;
+        upperLeftGate.setPosition(1);
+        upperRightGate.setPosition(0.0);
         waitForStart();
 
         while(opModeIsActive()) {
@@ -66,19 +68,19 @@ public class TestForKirk extends LinearOpMode {
                     intake.setPower(0);
 
 
-            if (gamepad2.left_bumper) {
+            if (gamepad2.left_bumper || gamepad2.right_bumper) {
                 upperLeftGate.setPosition(0.5);
             }
 
-            if (gamepad2.left_trigger > 0.1) {
+            if ((gamepad2.left_trigger > 0.1) || (gamepad2.right_trigger > 0.1)) {
                 upperLeftGate.setPosition(1);
             }
 
-            if (gamepad2.right_bumper) {
+            if (gamepad2.right_bumper || gamepad2.left_bumper) {
                 upperRightGate.setPosition(0.4);
             }
 
-            if (gamepad2.right_trigger > 0.1) {
+            if ((gamepad2.right_trigger > 0.1) || (gamepad2.left_trigger > 0.1)){
                 upperRightGate.setPosition(0.0);
             }
 
