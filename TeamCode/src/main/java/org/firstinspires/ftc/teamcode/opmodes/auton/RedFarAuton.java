@@ -29,9 +29,9 @@ public class RedFarAuton extends LinearOpMode {
                         .lineToX(24)
                         .build()
         );
-        intake.setMotorPower(0.5);
-        shooter.shoot(10);
-        Thread.sleep(7000);
-        double setMotorVelocity = 0;
+//        intake.setMotorPower(0.5);
+//        shooter.shoot(10);
+//        Thread.sleep(7000);
+//        double setMotorVelocity = 0;
     }
 }

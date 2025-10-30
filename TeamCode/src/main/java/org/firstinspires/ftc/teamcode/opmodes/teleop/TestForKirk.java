@@ -42,7 +42,7 @@ public class TestForKirk extends LinearOpMode {
             );
             if (this.gamepad2.y) {
 //                shooterRight.setPower(-1);
-                shooterLeft.setPower(-1);
+                shooterLeft.setPower(1);
             }
             else {
                 if (this.gamepad2.bWasPressed()) {

@@ -19,6 +19,7 @@ public class SmartShooter {
 
     public SmartShooter(HardwareMap hardwareMap){
         this.motor = hardwareMap.get(DcMotorEx.class, SmartShooterConstants.MOTOR_NAME);
+        this.motor.setDirection(SmartShooterConstants.MOTOR_DIRECTION);
         this.upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
         this.upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
         this.lowerGates();
