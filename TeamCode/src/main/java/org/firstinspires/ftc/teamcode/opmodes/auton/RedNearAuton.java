@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
@@ -16,12 +17,14 @@ public class RedNearAuton extends LinearOpMode {
         // Initialize MecanumDrive. The starting pose is (0, 0) with a 0-degree heading.
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         SmartShooter shooter = new SmartShooter(hardwareMap);
-        Intake intake = new Intake(hardwareMap);
+        DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         // Wait for the driver to press start
         waitForStart();
-        intake.setMotorPower(0.5);
         shooter.shoot(10);
-        Thread.sleep(10000);
+        Thread.sleep(3000);
+        intake.setPower(-0.5);
+        shooter.shoot(10);
+        Thread.sleep(9000);
         double setMotorVelocity = 0;
 
         if (isStopRequested()) return;
