@@ -72,14 +72,14 @@ public class SmartShooter {
         upperLeftGate.setPosition(1);
         upperRightGate.setPosition(0.0);
     }
-    public void shoot(double distance) {
+    public void shoot(double velocity) {
 //        double velocity = distanceToVelocity.interpolate(distance);
 //        this.setMotorVelocity(velocity);
         // TODO - is ball already engaged, or does it need to be dropped,
         // maybe after a short delay to allow the motor to spin up?
-        this.motor.setPower(1);
+        this.motor.setVelocity(800);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
         }
         this.raiseGates();
@@ -87,7 +87,7 @@ public class SmartShooter {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
         }
-        this.motor.setPower(0);
+        this.motor.setVelocity(0);
         this.lowerGates();
 
 

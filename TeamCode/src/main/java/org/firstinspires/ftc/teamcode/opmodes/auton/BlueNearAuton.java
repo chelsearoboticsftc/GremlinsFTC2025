@@ -20,9 +20,8 @@ public class BlueNearAuton extends LinearOpMode {
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         // Wait for the driver to press start
         waitForStart();
-        shooter.shoot(10);
+        intake.setPower(-0.7);
         Thread.sleep(3000);
-        intake.setPower(-0.5);
         shooter.shoot(10);
         Thread.sleep(9000);
         double setMotorVelocity = 0;
@@ -32,6 +31,8 @@ public class BlueNearAuton extends LinearOpMode {
         // We create an "action" to drive forward (along the X-axis) by 120 inches.
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
+                        .lineToX(12)
+                        .turn(30)
                         .lineToX(12)
                         .build()
         );
