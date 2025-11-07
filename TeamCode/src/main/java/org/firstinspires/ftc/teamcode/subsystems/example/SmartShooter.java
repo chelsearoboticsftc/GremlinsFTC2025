@@ -79,7 +79,7 @@ public class SmartShooter {
         // maybe after a short delay to allow the motor to spin up?
         this.motor.setVelocity(800);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
         }
         this.raiseGates();
