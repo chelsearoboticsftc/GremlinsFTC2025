@@ -31,9 +31,9 @@ public class BlueNearAuton extends LinearOpMode {
         // We create an "action" to drive forward (along the X-axis) by 120 inches.
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .lineToX(12)
-                        .turn(30)
-                        .lineToX(12)
+                        .lineToX(24)
+                        .turn(-0.5)
+                        .lineToX(24)
                         .build()
         );
     }
