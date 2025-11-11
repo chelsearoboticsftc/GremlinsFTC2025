@@ -63,16 +63,33 @@ public class SmartShooter {
         //motorName.setTargetPosition(motorSetPosition);
     }
 
-    public void raiseGates(){
+    public void raiseLeftGate() {
         upperLeftGate.setPosition(0.5);
+    }
+    public void raiseRightGate() {
         upperRightGate.setPosition(0.4);
     }
+    public void raiseGates(){
+        this.raiseLeftGate();
+        this.raiseRightGate();
+    }
 
-    public void lowerGates(){
+    public void lowerLeftGate() {
         upperLeftGate.setPosition(1);
+    }
+
+    public void lowerRightGate() {
         upperRightGate.setPosition(0.0);
     }
-    public void shoot(double velocity) {
+    public void lowerGates(){
+        this.lowerLeftGate();
+        this.lowerRightGate();
+    }
+
+    public void shoot(double velocity, boolean left, boolean right) {
+        if (left && right) {
+            return;
+        }
 //        double velocity = distanceToVelocity.interpolate(distance);
 //        this.setMotorVelocity(velocity);
         // TODO - is ball already engaged, or does it need to be dropped,
@@ -82,15 +99,20 @@ public class SmartShooter {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
         }
-        this.raiseGates();
+
+        if (left) {
+            this.raiseLeftGate();
+        }
+        if (right) {
+            this.raiseRightGate();
+        }
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
         }
         this.motor.setVelocity(0);
         this.lowerGates();
-
-
     }
 
     public void setPower(double power) {
