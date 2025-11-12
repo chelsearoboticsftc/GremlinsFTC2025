@@ -21,9 +21,10 @@ public class BlueNearAuton extends LinearOpMode {
         // Wait for the driver to press start
         waitForStart();
         intake.setPower(-0.7);
-        Thread.sleep(3000);
-        shooter.shoot(10);
-        Thread.sleep(9000);
+        shooter.shoot(100, true, false);
+        shooter.shoot(100, false, true);
+        shooter.shoot(100, true, false);
+        shooter.shoot(100, false, true);
         double setMotorVelocity = 0;
         if (isStopRequested()) return;
 

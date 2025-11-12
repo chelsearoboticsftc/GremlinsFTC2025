@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.utils.LookupTable;
 
 public class SmartShooter {
@@ -94,7 +95,7 @@ public class SmartShooter {
 //        this.setMotorVelocity(velocity);
         // TODO - is ball already engaged, or does it need to be dropped,
         // maybe after a short delay to allow the motor to spin up?
-        this.motor.setVelocity(800);
+        this.setMotorVelocity(800);
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
@@ -120,6 +121,6 @@ public class SmartShooter {
     }
 
     public void setMotorVelocity(double angularRate) {
-        this.motor.setVelocity(angularRate);
+        this.motor.setVelocity(angularRate, AngleUnit.DEGREES);
     }
 }

@@ -21,7 +21,10 @@ public class RedNearAuton extends LinearOpMode {
         // Wait for the driver to press start
         waitForStart();
         intake.setPower(-0.7);
-        shooter.shoot(10);
+        shooter.shoot(10, true, false);
+        shooter.shoot(10, false, true);
+        shooter.shoot(10, true, false);
+        shooter.shoot(10, false, true);
         Thread.sleep(9000);
         double setMotorVelocity = 0;
 
