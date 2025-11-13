@@ -20,12 +20,19 @@ public class BlueNearAuton extends LinearOpMode {
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         // Wait for the driver to press start
         waitForStart();
-        intake.setPower(-0.7);
-        shooter.shoot(100, true, false);
-        shooter.shoot(100, false, true);
-        shooter.shoot(100, true, false);
-        shooter.shoot(100, false, true);
-        double setMotorVelocity = 0;
+
+        intake.setPower(-1);
+        shooter.setMotorVelocity(320);
+        Thread.sleep(5000);
+        shooter.raiseLeftGate();
+        Thread.sleep(2000);
+        shooter.lowerLeftGate();
+        shooter.raiseRightGate();
+        Thread.sleep(2000);
+        shooter.lowerRightGate();
+        shooter.setPower(0);
+        intake.setPower(0);
+
         if (isStopRequested()) return;
 
         // Road Runner uses inches, so we convert 10 feet to 120 inches.

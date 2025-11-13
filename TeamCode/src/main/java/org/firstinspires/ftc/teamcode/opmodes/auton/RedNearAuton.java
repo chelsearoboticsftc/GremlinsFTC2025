@@ -20,13 +20,23 @@ public class RedNearAuton extends LinearOpMode {
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         // Wait for the driver to press start
         waitForStart();
-        intake.setPower(-0.7);
-        shooter.shoot(10, true, false);
-        shooter.shoot(10, false, true);
-        shooter.shoot(10, true, false);
-        shooter.shoot(10, false, true);
-        Thread.sleep(9000);
-        double setMotorVelocity = 0;
+
+        intake.setPower(-1);
+        shooter.setMotorVelocity(320);
+        Thread.sleep(5000);
+        shooter.raiseLeftGate();
+        Thread.sleep(2000);
+        shooter.lowerLeftGate();
+        shooter.raiseRightGate();
+        Thread.sleep(2000);
+        shooter.lowerRightGate();
+        shooter.setPower(0);
+        intake.setPower(0);
+
+//        shooter.shoot(100, true, false);
+//        shooter.shoot(100, false, true);
+//        shooter.shoot(100, true, false);
+//        shooter.shoot(100, false, true);
 
         if (isStopRequested()) return;
 

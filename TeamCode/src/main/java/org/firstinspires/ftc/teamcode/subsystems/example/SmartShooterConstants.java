@@ -13,7 +13,7 @@ public class SmartShooterConstants {
     public static final DcMotorSimple.Direction MOTOR_DIRECTION = DcMotorSimple.Direction.FORWARD;
     public static final double VELOCITY_P = 1000;
     public static final double VELOCITY_I = 0.0;
-    public static final double VELOCITY_D = 0;
+    public static final double VELOCITY_D = 5;
     public static final double VELOCITY_F = 50;
     public static double POSITION_P = 5.0;
     public static final List<Pair> LOOKUP_TABLE = List.of(

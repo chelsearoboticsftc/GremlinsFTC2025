@@ -95,7 +95,7 @@ public class SmartShooter {
 //        this.setMotorVelocity(velocity);
         // TODO - is ball already engaged, or does it need to be dropped,
         // maybe after a short delay to allow the motor to spin up?
-        this.setMotorVelocity(800);
+        this.setMotorVelocity(320);
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {

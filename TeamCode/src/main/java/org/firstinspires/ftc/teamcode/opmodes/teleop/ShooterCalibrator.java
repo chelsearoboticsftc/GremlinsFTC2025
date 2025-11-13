@@ -21,7 +21,7 @@ public class ShooterCalibrator extends LinearOpMode {
         DcMotorEx shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterLeft");
 
         waitForStart();
-//        intake.setPower(-1);
+        intake.setPower(-1);
         double step = 20;
         double velocity = 0;
 
@@ -36,6 +36,8 @@ public class ShooterCalibrator extends LinearOpMode {
             }
             shooter.setMotorVelocity(velocity);
             tel.addData("Commanded", velocity);
+            this.telemetry.addData("Velocity", velocity);
+            this.telemetry.update();
             tel.addData("Actual", shooterMotor.getVelocity(AngleUnit.DEGREES));
             tel.update();
 

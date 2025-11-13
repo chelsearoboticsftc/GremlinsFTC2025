@@ -19,6 +19,7 @@ public class TestForKirk2 extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0,0));
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         SmartShooter shooter = new SmartShooter(hardwareMap);
+        boolean intakeon = false;
         waitForStart();
 
         while(opModeIsActive()) {
@@ -34,22 +35,33 @@ public class TestForKirk2 extends LinearOpMode {
                     )
             );
 
-            if (this.gamepad2.a)
-                intake.setPower(-1);
-            else
-                if (this.gamepad2.x)
-                    intake.setPower(1);
-                else
+            if (this.gamepad2.aWasPressed())
+                intakeon = !intakeon;
+
+            if (this.gamepad2.x)
+                intake.setPower(1);
+            else {
+                if (intakeon) {
+                    intake.setPower(-1);
+                    shooter.setMotorVelocity(320);
+                }
+                else {
                     intake.setPower(0);
-
-
-            if (gamepad2.left_bumper) {
-                shooter.shoot(100, true, false);
+                    shooter.setPower(0);
+                }
             }
 
-            if (gamepad2.right_bumper) {
-                shooter.shoot(100, false, true);
-            }
+            if (gamepad2.left_bumper)
+                shooter.raiseLeftGate();
+
+            if (gamepad2.left_trigger > 0.1)
+                shooter.lowerLeftGate();
+
+            if(gamepad2.right_bumper)
+                shooter.raiseRightGate();
+
+            if (gamepad2.right_trigger > 0.1)
+                shooter.lowerRightGate();
 
         }
 
