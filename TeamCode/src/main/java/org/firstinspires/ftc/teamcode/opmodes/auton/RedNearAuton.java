@@ -45,7 +45,11 @@ public class RedNearAuton extends LinearOpMode {
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
                         .lineToX(24)
-                        .turn(-0.5)
+                        .turn(0.5)
+                        .build()
+        );
+        Actions.runBlocking(
+                drive.actionBuilder(new Pose2d(0, 0, 0))
                         .lineToX(24)
                         .build()
         );
