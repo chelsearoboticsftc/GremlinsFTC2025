@@ -22,7 +22,7 @@ public class BlueNearAuton extends LinearOpMode {
         waitForStart();
 
         intake.setPower(-1);
-        shooter.setMotorVelocity(320);
+        shooter.setMotorVelocity(350);
         Thread.sleep(5000);
         shooter.raiseLeftGate();
         Thread.sleep(2000);
