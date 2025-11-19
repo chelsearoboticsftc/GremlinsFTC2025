@@ -30,10 +30,11 @@ public class TestForKirk3 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0,0));
-        DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
+        DcMotorEx intake1 = hardwareMap.get(DcMotorEx.class, "intake");
+        DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
         SmartShooter shooter = new SmartShooter(hardwareMap);
         ColorSensorProcessor colorSensorLeft = new ColorSensorProcessor(hardwareMap, "colorSensorLeft");
-        Limelight limelight = new Limelight(hardwareMap);
+//        Limelight limelight = new Limelight(hardwareMap);
 
         ElapsedTime shootingTimer = new ElapsedTime();
         ShootingState currentShootingState = ShootingState.IDLE;
@@ -59,17 +60,21 @@ public class TestForKirk3 extends LinearOpMode {
                 // toggle intake power
                 intakeon = !intakeon;
 
-            if (this.gamepad2.x)
+            if (this.gamepad2.x) {
                 // run intake in reverse
-                intake.setPower(1);
+                intake1.setVelocity(1575);
+                intake2.setVelocity(1575);
+            }
             else {
                 if (intakeon) {
-                    intake.setPower(-1);
+                    intake1.setVelocity(-1575);
+                    intake2.setVelocity(-1575);
                     // start flywheel when the intake is running
                     shooter.setMotorVelocity(320);
                 }
                 else {
-                    intake.setPower(0);
+                    intake1.setPower(0);
+                    intake2.setPower(0);
                     shooter.setPower(0);
                 }
             }
@@ -147,9 +152,9 @@ public class TestForKirk3 extends LinearOpMode {
                             colorSensorLeft.hsvValues[2]
                     )
             );
-            for (Limelight.TagDetection detection : limelight.getCurrentDetections()) {
-                telemetry.addData("Detection", detection.toString());
-            }
+//            for (Limelight.TagDetection detection : limelight.getCurrentDetections()) {
+//                telemetry.addData("Detection", detection.toString());
+//            }
             telemetry.update();
         }
     }

@@ -41,13 +41,13 @@ public class TestForKirk2 extends LinearOpMode {
 
 
             if (this.gamepad2.x) {
-                intake1.setPower(1);
-                intake2.setPower(1);
+                intake1.setVelocity(1575);
+                intake2.setVelocity(1575);
             }
             else {
                 if (intakeon) {
-                    intake1.setPower(-1);
-                    intake2.setPower(-1);
+                    intake1.setVelocity(-1575);
+                    intake2.setVelocity(-1575);
                     shooter.setMotorVelocity(350);
                 }
                 else {

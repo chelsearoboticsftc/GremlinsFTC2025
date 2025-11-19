@@ -16,14 +16,14 @@ public class ColorSensorProcessor {
     public ColorSensor colorSensor;
 
     // target hues found in org.firstinspires.ftc.vision.opencv.PredominantColorProcessor
-    private static final float GREEN_HUE = 168.0f;
+    private static final float GREEN_HUE = 160.0f;
 
-    private static final float PURPLE_HUE = 260.0f;
+    private static final float PURPLE_HUE = 210.0f;
 
-    private static final float HUE_TOLERANCE = 50.0f;
+    private static final float HUE_TOLERANCE = 30.0f;
 
     // Minimum saturation and value to be considered a color
-    private static final float MIN_SATURATION = 0.4f;
+    private static final float MIN_SATURATION = 0.2f;
     private static final float MIN_VALUE = 0.2f;
 
 
@@ -63,12 +63,12 @@ public class ColorSensorProcessor {
         }
 
         // Check if the hue is within our defined orange range
-        if (hue >= GREEN_HUE - HUE_TOLERANCE && hue <= GREEN_HUE + HUE_TOLERANCE) {
-            return DetectedColor.GREEN;
-        }
         // Check if the hue is within our defined purple range
-        else if (hue >= PURPLE_HUE - HUE_TOLERANCE && hue <= PURPLE_HUE + HUE_TOLERANCE) {
+        if (hue >= PURPLE_HUE - HUE_TOLERANCE && hue <= PURPLE_HUE + HUE_TOLERANCE) {
             return DetectedColor.PURPLE;
+        }
+        else if (hue >= GREEN_HUE - HUE_TOLERANCE && hue <= GREEN_HUE + HUE_TOLERANCE) {
+            return DetectedColor.GREEN;
         }
 
         // If it's neither, return NONE
