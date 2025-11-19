@@ -18,11 +18,13 @@ public class RedNearAuton extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         SmartShooter shooter = new SmartShooter(hardwareMap);
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
+        DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
         // Wait for the driver to press start
         waitForStart();
 
-        intake.setPower(-1);
-        shooter.setMotorVelocity(350);
+        intake.setVelocity(-1500);
+        intake2.setVelocity(-1500);
+        shooter.setMotorVelocity(320);
         Thread.sleep(5000);
         shooter.raiseLeftGate();
         Thread.sleep(2000);
@@ -32,6 +34,7 @@ public class RedNearAuton extends LinearOpMode {
         shooter.lowerRightGate();
         shooter.setPower(0);
         intake.setPower(0);
+        intake2.setPower(0);
 
 //        shooter.shoot(100, true, false);
 //        shooter.shoot(100, false, true);
