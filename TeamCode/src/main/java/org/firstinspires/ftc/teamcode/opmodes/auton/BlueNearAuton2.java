@@ -32,7 +32,7 @@ public class BlueNearAuton2 extends LinearOpMode {
 
         // start intake and flywheel
         intake.setPower(-1);
-        shooter.setMotorVelocity(320);
+        shooter.setMotorVelocity(350);
         Thread.sleep(1000);
 
         // shoot preloaded artifacts

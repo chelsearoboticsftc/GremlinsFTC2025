@@ -24,7 +24,7 @@ public class RedNearAuton extends LinearOpMode {
 
         intake.setVelocity(-1500);
         intake2.setVelocity(-1500);
-        shooter.setMotorVelocity(320);
+        shooter.setMotorVelocity(350);
         Thread.sleep(5000);
         shooter.raiseLeftGate();
         Thread.sleep(2000);

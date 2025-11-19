@@ -70,7 +70,7 @@ public class TestForKirk3 extends LinearOpMode {
                     intake1.setVelocity(-1575);
                     intake2.setVelocity(-1575);
                     // start flywheel when the intake is running
-                    shooter.setMotorVelocity(320);
+                    shooter.setMotorVelocity(350);
                 }
                 else {
                     intake1.setPower(0);
