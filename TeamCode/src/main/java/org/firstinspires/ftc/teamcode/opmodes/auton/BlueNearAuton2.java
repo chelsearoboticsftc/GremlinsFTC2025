@@ -61,13 +61,13 @@ public class BlueNearAuton2 extends LinearOpMode {
     private Action slurpArtifacts(MecanumDrive drive, double rowY) {
         return drive.actionBuilder(startingPos)
             // drive up to indicated row
-            .splineToLinearHeading(
-                    new Pose2d(-2. * gridSize, rowY + 2, Math.toRadians(-160)),
-                    Math.toRadians(-160)
+            .splineTo(
+                    new Vector2d(-2.1 * gridSize, rowY + 2),
+                    Math.toRadians(-180)
             )
             // reverse back to starting pose
             .setReversed(true)
-            .splineTo(startingPos.position, startingPos.heading.real + Math.PI)
+            .splineTo(startingPos.position, startingPos.heading.plus(Math.toRadians(180)))
             .build();
     }
 
