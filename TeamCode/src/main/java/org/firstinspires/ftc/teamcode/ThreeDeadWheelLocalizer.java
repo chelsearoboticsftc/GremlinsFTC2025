@@ -21,12 +21,12 @@ import org.firstinspires.ftc.teamcode.messages.ThreeDeadWheelInputsMessage;
 
 @Config
 public final class ThreeDeadWheelLocalizer implements Localizer {
-
-    public static final double inchPerTick = 47.5 / 8106.0;
     public static class Params {
-        public double par0YTicks = -7.5 * inchPerTick;  // -2076.61464754065; // y position of the first parallel encoder (in tick units)
-        public double par1YTicks = 7.5 * inchPerTick;   // 2056.101364714766; // y position of the second parallel encoder (in tick units)
-        public double perpXTicks =  -7.5 * inchPerTick;  // -1909.3227925056099; // x position of the perpendicular encoder (in tick units)
+        // TODO!!!! this needs to negative (-2166.558)
+        // leaving for now because we tuned auton with the error
+        public double par0YTicks = 2166.558005004111;  // y position of the first parallel encoder (in tick units)
+        public double par1YTicks = 2041.714523279955;   // y position of the second parallel encoder (in tick units)
+        public double perpXTicks =  -2045.056743143416;  // -1909.3227925056099; // x position of the perpendicular encoder (in tick units)
     }
 
     public static Params PARAMS = new Params();

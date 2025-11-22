@@ -23,17 +23,29 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        final Pose2d startingPos = new Pose2d(-2.1 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
-        final double rowY = -1.5 * gridSize;
+        final Pose2d startingPos = new Pose2d(2.1 * gridSize, 2.3 * gridSize, Math.toRadians(225));
+        final double posY = .5 * gridSize;
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
-                .splineTo(
-                        new Vector2d(-2.1 * gridSize, rowY + 2),
-                        Math.toRadians(-180)
-                )
-                // reverse back to starting pose
-                .setReversed(true)
-                .splineTo(startingPos.position, startingPos.heading.plus(Math.toRadians(180)))
-                .build()
+                        .lineToX(.5 * gridSize)
+                        .turn(Math.toRadians(35))
+                        .lineToY(posY)
+                        .turn(Math.toRadians(80))
+                        .lineToX(2.3 * gridSize)
+                        .setReversed(true)
+                        .lineToX(0.5 * gridSize)
+                        .turn(Math.toRadians(-90))
+                        .lineToY(0.5 * gridSize)
+                        .turn(Math.toRadians(-35))
+                        .lineToX(startingPos.position.x)
+                        .build()
+//                .splineTo(
+//                        new Vector2d(-2.1 * gridSize, rowY + 2),
+//                        Math.toRadians(-180)
+//                )
+//                // reverse back to starting pose
+//                .setReversed(true)
+//                .splineTo(startingPos.position, startingPos.heading.plus(Math.toRadians(180)))
+//                .build()
         );
 
         Image img = null;

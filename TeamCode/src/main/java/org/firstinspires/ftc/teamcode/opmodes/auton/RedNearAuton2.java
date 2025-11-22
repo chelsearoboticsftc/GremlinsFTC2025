@@ -5,7 +5,6 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
@@ -14,11 +13,11 @@ import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 @Autonomous
-public class BlueNearAuton2 extends LinearOpMode {
+public class RedNearAuton2 extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.5;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(-2.1 * gridSize, 2.3 * gridSize, Math.toRadians(-45));
+    final Pose2d startingPos = new Pose2d(2.1 * gridSize, 2.3 * gridSize, Math.toRadians(225));
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -60,16 +59,16 @@ public class BlueNearAuton2 extends LinearOpMode {
 
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
         return drive.actionBuilder(startingPos)
-                .lineToX(-.5 * gridSize)
-                .turn(Math.toRadians(-35))
-                .lineToY(posY)
-                .turn(Math.toRadians(-80))
-                .lineToX(-2.3 * gridSize)
-                .setReversed(true)
-                .lineToX(-0.5 * gridSize)
-                .turn(Math.toRadians(90))
-                .lineToY(0.5 * gridSize)
+                .lineToX(.5 * gridSize)
                 .turn(Math.toRadians(35))
+                .lineToY(posY)
+                .turn(Math.toRadians(80))
+                .lineToX(2.3 * gridSize)
+                .setReversed(true)
+                .lineToX(0.5 * gridSize)
+                .turn(Math.toRadians(-90))
+                .lineToY(0.5 * gridSize)
+                .turn(Math.toRadians(-35))
                 .lineToX(startingPos.position.x)
                 .build();
     }
