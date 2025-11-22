@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
-@Disabled
+
 @Autonomous
 public class BlueNearAuton2 extends LinearOpMode {
     // grid size is handy for describing distances
@@ -31,20 +31,20 @@ public class BlueNearAuton2 extends LinearOpMode {
         waitForStart();
 
         // start intake and flywheel
-        intake.setPower(-1);
-        shooter.setMotorVelocity(350);
-        Thread.sleep(1000);
+//        intake.setPower(-1);
+//        shooter.setMotorVelocity(350);
+//        Thread.sleep(1000);
 
         // shoot preloaded artifacts
-        shoot(shooter);
+//        shoot(shooter);
 
         // load field artifacts
         Actions.runBlocking(slurpArtifacts(drive, 0.5 * gridSize));
-        shoot(shooter);
+//        shoot(shooter);
         Actions.runBlocking(slurpArtifacts(drive, -0.5 * gridSize));
-        shoot(shooter);
+//        shoot(shooter);
         Actions.runBlocking(slurpArtifacts(drive, -1.5 * gridSize));
-        shoot(shooter);
+//        shoot(shooter);
 
         // leave line
         Actions.runBlocking(
@@ -54,8 +54,8 @@ public class BlueNearAuton2 extends LinearOpMode {
         );
 
         // turn off intake and flywheel
-        shooter.setPower(0);
-        intake.setPower(0);
+//        shooter.setPower(0);
+//        intake.setPower(0);
     }
 
     private Action slurpArtifacts(MecanumDrive drive, double rowY) {
