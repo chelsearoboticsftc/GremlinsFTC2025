@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes.auton;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
+@Disabled
 @Autonomous
 public class BlueNearAuton extends LinearOpMode {
     @Override
@@ -33,6 +35,7 @@ public class BlueNearAuton extends LinearOpMode {
         Thread.sleep(2000);
         shooter.lowerRightGate();
         shooter.setPower(0);
+
         intake.setPower(0);
         intake2.setPower(0);
 

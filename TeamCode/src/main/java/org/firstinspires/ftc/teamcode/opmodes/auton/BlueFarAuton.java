@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
+
 @Autonomous
 public class BlueFarAuton extends LinearOpMode {
     @Override
