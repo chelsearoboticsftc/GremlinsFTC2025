@@ -18,7 +18,7 @@ public class BlueNearAuton2 extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.5;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(-2.1 * gridSize, 2.3 * gridSize, Math.toRadians(-45));
+    final Pose2d startingPos = new Pose2d(-2.05 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -59,17 +59,17 @@ public class BlueNearAuton2 extends LinearOpMode {
     }
 
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
-        return drive.actionBuilder(startingPos)
-                .lineToX(-.5 * gridSize)
-                .turn(Math.toRadians(-35))
+        return drive.actionBuilder(drive.localizer.getPose())
+                .lineToX(-1 * gridSize)
+                .turnTo(Math.toRadians(-90))
                 .lineToY(posY)
-                .turn(Math.toRadians(-80))
+                .turnTo(Math.toRadians(180))
                 .lineToX(-2.3 * gridSize)
                 .setReversed(true)
-                .lineToX(-0.5 * gridSize)
-                .turn(Math.toRadians(90))
-                .lineToY(0.5 * gridSize)
-                .turn(Math.toRadians(35))
+                .lineToX(-1 * gridSize)
+                .turnTo(Math.toRadians(-90))
+                .lineToY(1.35 * gridSize)
+                .turnTo(startingPos.heading.toDouble())
                 .lineToX(startingPos.position.x)
                 .build();
     }

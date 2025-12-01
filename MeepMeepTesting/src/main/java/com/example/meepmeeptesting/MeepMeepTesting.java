@@ -20,32 +20,23 @@ public class MeepMeepTesting {
         final double gridSize = 23.5;
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 .setDimensions(16, 16)
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(50, 50, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        final Pose2d startingPos = new Pose2d(2.1 * gridSize, 2.3 * gridSize, Math.toRadians(225));
+        final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(215));
         final double posY = .5 * gridSize;
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
-                        .lineToX(.5 * gridSize)
-                        .turn(Math.toRadians(35))
-                        .lineToY(posY)
-                        .turn(Math.toRadians(80))
-                        .lineToX(2.3 * gridSize)
-                        .setReversed(true)
-                        .lineToX(0.5 * gridSize)
-                        .turn(Math.toRadians(-90))
-                        .lineToY(0.5 * gridSize)
-                        .turn(Math.toRadians(-35))
-                        .lineToX(startingPos.position.x)
-                        .build()
-//                .splineTo(
-//                        new Vector2d(-2.1 * gridSize, rowY + 2),
-//                        Math.toRadians(-180)
-//                )
-//                // reverse back to starting pose
-//                .setReversed(true)
-//                .splineTo(startingPos.position, startingPos.heading.plus(Math.toRadians(180)))
-//                .build()
+                .splineToLinearHeading(
+                        new Pose2d(1.2 * gridSize, posY, Math.toRadians(0)),
+                        Math.toRadians(-90)
+                )
+                .setTangent(0)
+                .lineToX(2.1 * gridSize)
+                .setTangent(Math.toRadians(180))
+                .lineToX(startingPos.position.x)
+                .setTangent(Math.toRadians(90))
+                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+                .build()
         );
 
         Image img = null;
