@@ -65,10 +65,10 @@ public class SmartShooter {
     }
 
     public void raiseLeftGate() {
-        upperLeftGate.setPosition(0.5);
+        upperLeftGate.setPosition(0.3);
     }
     public void raiseRightGate() {
-        upperRightGate.setPosition(0.4);
+        upperRightGate.setPosition(0.5);
     }
     public void raiseGates(){
         this.raiseLeftGate();
@@ -76,7 +76,7 @@ public class SmartShooter {
     }
 
     public void lowerLeftGate() {
-        upperLeftGate.setPosition(1);
+        upperLeftGate.setPosition(0.9);
     }
 
     public void lowerRightGate() {
