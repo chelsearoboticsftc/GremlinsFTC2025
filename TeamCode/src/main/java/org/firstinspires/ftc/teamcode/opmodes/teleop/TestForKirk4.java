@@ -86,6 +86,8 @@ public class TestForKirk4 extends LinearOpMode {
                         // Shoot green first
                         shootLeftGate = (colorSensorLeft.getDetectedColor() == DetectedColor.GREEN);
                         currentShootingState = ShootingState.RAISING_GATE;
+                    } else {
+                        shooter.lowerGates();
                     }
                     break;
 
