@@ -28,7 +28,7 @@ public class BlueFarAuton extends LinearOpMode {
         // We create an "action" to drive forward (along the X-axis) by 12 inches.
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .lineToX(12)
+                        .lineToX(24)
                         .build()
         );
 //        intake.setMotorPower(0.5);

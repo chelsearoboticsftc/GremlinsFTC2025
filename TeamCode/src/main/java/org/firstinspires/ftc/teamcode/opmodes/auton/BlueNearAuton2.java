@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
@@ -23,16 +24,19 @@ public class BlueNearAuton2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         MecanumDrive drive = new MecanumDrive(hardwareMap, startingPos);
+        drive.localizer.setPose(startingPos);
         SmartShooter shooter = new SmartShooter(hardwareMap);
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
+        DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
 
         // Wait for the driver to press start
         waitForStart();
 
         // start intake and flywheel
         shooter.setMotorVelocity(350);
-        Thread.sleep(1000);
-        intake.setPower(-1);
+        Thread.sleep(1500);
+        intake.setVelocity(-1575);
+        intake2.setVelocity(-1575);
         Thread.sleep(1000);
 
         // shoot preloaded artifacts
@@ -60,15 +64,15 @@ public class BlueNearAuton2 extends LinearOpMode {
 
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
         return drive.actionBuilder(drive.localizer.getPose())
-                .lineToX(-1 * gridSize)
+                .lineToX(-0.8 * gridSize)
                 .turnTo(Math.toRadians(-90))
                 .lineToY(posY)
                 .turnTo(Math.toRadians(180))
                 .lineToX(-2.3 * gridSize)
                 .setReversed(true)
-                .lineToX(-1 * gridSize)
+                .lineToX(-0.8 * gridSize)
                 .turnTo(Math.toRadians(-90))
-                .lineToY(1.35 * gridSize)
+                .lineToY(1.2 * gridSize)
                 .turnTo(startingPos.heading.toDouble())
                 .lineToX(startingPos.position.x)
                 .build();

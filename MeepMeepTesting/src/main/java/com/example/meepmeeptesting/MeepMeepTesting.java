@@ -24,7 +24,7 @@ public class MeepMeepTesting {
                 .build();
 
         final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(215));
-        final double posY = .5 * gridSize;
+        final double posY = -1.5 * gridSize;
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
                 .splineToLinearHeading(
                         new Pose2d(1.2 * gridSize, posY, Math.toRadians(0)),
@@ -36,6 +36,17 @@ public class MeepMeepTesting {
                 .lineToX(startingPos.position.x)
                 .setTangent(Math.toRadians(90))
                 .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+//                        .lineToX(0.8 * gridSize)
+//                        .turnTo(Math.toRadians(-90))
+//                        .lineToY(posY)
+//                        .turnTo(Math.toRadians(0))
+//                        .lineToX(2.3 * gridSize)
+//                        .setReversed(true)
+//                        .lineToX(0.8 * gridSize)
+//                        .turnTo(Math.toRadians(-90))
+//                        .lineToY(1.2 * gridSize)
+//                        .turnTo(startingPos.heading.toDouble())
+//                        .lineToX(startingPos.position.x)
                 .build()
         );
 

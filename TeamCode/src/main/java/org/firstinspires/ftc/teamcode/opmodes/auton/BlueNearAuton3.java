@@ -5,21 +5,19 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
-import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 @Autonomous
-public class RedNearAuton2 extends LinearOpMode {
+public class BlueNearAuton3 extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.5;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
+    final Pose2d startingPos = new Pose2d(-2.05 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -52,9 +50,9 @@ public class RedNearAuton2 extends LinearOpMode {
 
         // leave line
         Actions.runBlocking(
-                drive.actionBuilder(startingPos)
-                        .splineTo(new Vector2d(-1.5 * gridSize, 0), Math.toRadians(-90))
-                        .build()
+            drive.actionBuilder(startingPos)
+            .splineTo(new Vector2d(-1.5 * gridSize, 0), Math.toRadians(-90))
+            .build()
         );
 
         // turn off intake and flywheel
@@ -64,17 +62,16 @@ public class RedNearAuton2 extends LinearOpMode {
 
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
         return drive.actionBuilder(drive.localizer.getPose())
-                .lineToX(0.8 * gridSize)
-                .turnTo(Math.toRadians(-90))
-                .lineToY(posY)
-                .turnTo(Math.toRadians(0))
-                .lineToX(2.3 * gridSize)
-                .setReversed(true)
-                .lineToX(0.8 * gridSize)
-                .turnTo(Math.toRadians(-90))
-                .lineToY(1.2 * gridSize)
-                .turnTo(startingPos.heading.toDouble())
+                .splineToLinearHeading(
+                        new Pose2d(1.2 * gridSize, posY, Math.toRadians(0)),
+                        Math.toRadians(-90)
+                )
+                .setTangent(0)
+                .lineToX(2.1 * gridSize)
+                .setTangent(Math.toRadians(180))
                 .lineToX(startingPos.position.x)
+                .setTangent(Math.toRadians(90))
+                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
                 .build();
     }
 
