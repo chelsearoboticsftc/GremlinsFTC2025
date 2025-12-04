@@ -23,6 +23,7 @@ public class SmartShooter {
         this.motor.setDirection(SmartShooterConstants.MOTOR_DIRECTION);
         this.upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
         this.upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
+        this.upperRightGate.setDirection(Servo.Direction.REVERSE);
         this.lowerGates();
 
         //This defines the behavior at zero power (brake or coast)
@@ -65,10 +66,10 @@ public class SmartShooter {
     }
 
     public void raiseLeftGate() {
-        upperLeftGate.setPosition(0.3);
+        upperLeftGate.setPosition(0.);
     }
     public void raiseRightGate() {
-        upperRightGate.setPosition(0.5);
+        upperRightGate.setPosition(0.2);
     }
     public void raiseGates(){
         this.raiseLeftGate();
@@ -76,11 +77,11 @@ public class SmartShooter {
     }
 
     public void lowerLeftGate() {
-        upperLeftGate.setPosition(0.9);
+        upperLeftGate.setPosition(0.5);
     }
 
     public void lowerRightGate() {
-        upperRightGate.setPosition(0.0);
+        upperRightGate.setPosition(0.7);
     }
     public void lowerGates(){
         this.lowerLeftGate();

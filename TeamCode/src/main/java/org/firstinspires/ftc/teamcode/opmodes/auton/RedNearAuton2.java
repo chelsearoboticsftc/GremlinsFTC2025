@@ -19,7 +19,7 @@ public class RedNearAuton2 extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.5;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
+    final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(215));
 
     @Override
     public void runOpMode() throws InterruptedException {

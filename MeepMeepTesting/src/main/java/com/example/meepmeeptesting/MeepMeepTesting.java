@@ -23,30 +23,26 @@ public class MeepMeepTesting {
                 .setConstraints(50, 50, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        final Pose2d startingPos = new Pose2d(2.05 * gridSize, 2.1 * gridSize, Math.toRadians(215));
-        final double posY = -1.5 * gridSize;
+        final Pose2d startingPos = new Pose2d(-2 * gridSize, 2.2 * gridSize, Math.toRadians(-35));
+        final double posY = 0.5 * gridSize;
+
+        double wallX = (-2.1 * gridSize);
+        if (posY < 0.2 * gridSize){
+        wallX = (-2.3 * gridSize);
+        }
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
-                .splineToLinearHeading(
-                        new Pose2d(1.2 * gridSize, posY, Math.toRadians(0)),
-                        Math.toRadians(-90)
-                )
-                .setTangent(0)
-                .lineToX(2.1 * gridSize)
-                .setTangent(Math.toRadians(180))
-                .lineToX(startingPos.position.x)
-                .setTangent(Math.toRadians(90))
-                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
-//                        .lineToX(0.8 * gridSize)
-//                        .turnTo(Math.toRadians(-90))
-//                        .lineToY(posY)
-//                        .turnTo(Math.toRadians(0))
-//                        .lineToX(2.3 * gridSize)
-//                        .setReversed(true)
-//                        .lineToX(0.8 * gridSize)
-//                        .turnTo(Math.toRadians(-90))
-//                        .lineToY(1.2 * gridSize)
-//                        .turnTo(startingPos.heading.toDouble())
-//                        .lineToX(startingPos.position.x)
+                        .splineToLinearHeading(
+                                new Pose2d(-1 * gridSize, posY, Math.toRadians(180)),
+                                Math.toRadians(-90)
+                        )
+                        .setTangent(Math.toRadians(180))
+                        .lineToX(wallX)
+                        .setTangent(Math.toRadians(0))
+                        .lineToX((startingPos.position.x) + 9)
+                        .setTangent(Math.toRadians(90))
+                        .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+                        .setTangent(Math.toRadians(180))
+                        .lineToX(startingPos.position.x)
                 .build()
         );
 

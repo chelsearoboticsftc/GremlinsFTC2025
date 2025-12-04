@@ -9,15 +9,16 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.Limelight;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 @Autonomous
-public class BlueNearAuton3 extends LinearOpMode {
+public class BlueNearTokyoDrift extends LinearOpMode {
     // grid size is handy for describing distances
-    final double gridSize = 23.5;
+    final double gridSize = 23.625;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(-2.05 * gridSize, 2.1 * gridSize, Math.toRadians(-35));
+    final Pose2d startingPos = new Pose2d(-2 * gridSize, 2.2 * gridSize, Math.toRadians(-37));
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,12 +27,14 @@ public class BlueNearAuton3 extends LinearOpMode {
         SmartShooter shooter = new SmartShooter(hardwareMap);
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
+        limelight = new Limelight(hardwareMap);
+
 
         // Wait for the driver to press start
         waitForStart();
 
         // start intake and flywheel
-        shooter.setMotorVelocity(350);
+        shooter.setMotorVelocity(330);
         Thread.sleep(1500);
         intake.setVelocity(-1575);
         intake2.setVelocity(-1575);
@@ -41,11 +44,11 @@ public class BlueNearAuton3 extends LinearOpMode {
         shoot(shooter);
 
         // load field artifacts
-        Actions.runBlocking(slurpArtifacts(drive, 0.5 * gridSize));
+        runAction(drive, slurpArtifacts(drive, -0.3 * gridSize));
         shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -0.5 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, -0.3 * gridSize));
         shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -1.5 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, -1.2 * gridSize));
         shoot(shooter);
 
         // leave line
@@ -60,18 +63,33 @@ public class BlueNearAuton3 extends LinearOpMode {
         intake.setPower(0);
     }
 
+    private void runAction(MecanumDrive drive, Limelight limelight, Action trajectoryAction) {
+        boolean running = true;
+        while (opModeIsActive() && running) {
+            drive.updatePoseEstimate();
+            limelight.updatePose(drive);
+            running = trajectoryAction.run(new TelemtryPacket());
+        }
+    }
+
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
+        double wallX = (-2.05 * gridSize);
+        if (posY < 0.2 * gridSize){
+            wallX = (-2.25 * gridSize);
+        }
         return drive.actionBuilder(drive.localizer.getPose())
                 .splineToLinearHeading(
-                        new Pose2d(1.2 * gridSize, posY, Math.toRadians(0)),
+                        new Pose2d(-1 * gridSize, posY, Math.toRadians(180)),
                         Math.toRadians(-90)
                 )
-                .setTangent(0)
-                .lineToX(2.1 * gridSize)
                 .setTangent(Math.toRadians(180))
-                .lineToX(startingPos.position.x)
+                .lineToX(wallX)
+                .setTangent(Math.toRadians(0))
+                .lineToX((startingPos.position.x) + 3)
                 .setTangent(Math.toRadians(90))
                 .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+                .setTangent(Math.toRadians(180))
+                .lineToX(startingPos.position.x)
                 .build();
     }
 
