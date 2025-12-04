@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
 
 @Autonomous
-public class BlueNearTokyoDrift extends LinearOpMode {
+public class BlueTokyoDrift extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.625;
     // starting position - backed up to goal, ready to shoot

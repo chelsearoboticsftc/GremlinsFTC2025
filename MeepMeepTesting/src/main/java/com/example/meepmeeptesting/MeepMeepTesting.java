@@ -23,26 +23,26 @@ public class MeepMeepTesting {
                 .setConstraints(50, 50, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        final Pose2d startingPos = new Pose2d(-2 * gridSize, 2.2 * gridSize, Math.toRadians(-35));
+        final Pose2d startingPos = new Pose2d(2 * gridSize, 2.2 * gridSize, Math.toRadians(217));
         final double posY = 0.5 * gridSize;
 
-        double wallX = (-2.1 * gridSize);
+        double wallX = (2.1 * gridSize);
         if (posY < 0.2 * gridSize){
-        wallX = (-2.3 * gridSize);
+        wallX = (2.3 * gridSize);
         }
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
                         .splineToLinearHeading(
-                                new Pose2d(-1 * gridSize, posY, Math.toRadians(180)),
+                                new Pose2d(1 * gridSize, posY, Math.toRadians(0)),
                                 Math.toRadians(-90)
                         )
-                        .setTangent(Math.toRadians(180))
-                        .lineToX(wallX)
-                        .setTangent(Math.toRadians(0))
-                        .lineToX((startingPos.position.x) + 9)
-                        .setTangent(Math.toRadians(90))
-                        .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
-                        .setTangent(Math.toRadians(180))
-                        .lineToX(startingPos.position.x)
+                .setTangent(Math.toRadians(180))
+                .lineToX(wallX)
+                .setTangent(Math.toRadians(0))
+                .lineToX((startingPos.position.x) - 3)
+                .setTangent(Math.toRadians(90))
+                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+                .setTangent(Math.toRadians(180))
+                .lineToX(startingPos.position.x)
                 .build()
         );
 
