@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auton;
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -18,7 +19,7 @@ public class RedTokyoDrift extends LinearOpMode {
     // grid size is handy for describing distances
     final double gridSize = 23.625;
     // starting position - backed up to goal, ready to shoot
-    final Pose2d startingPos = new Pose2d(2 * gridSize, 2.2 * gridSize, Math.toRadians(217));
+    final Pose2d startingPos = new Pose2d(2 * gridSize, 2.2 * gridSize, Math.toRadians(216));
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,7 +28,7 @@ public class RedTokyoDrift extends LinearOpMode {
         SmartShooter shooter = new SmartShooter(hardwareMap);
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
-//        limelight = new Limelight(hardwareMap);
+        Limelight limelight = new Limelight(hardwareMap);
 
 
         // Wait for the driver to press start
@@ -44,9 +45,10 @@ public class RedTokyoDrift extends LinearOpMode {
         shoot(shooter);
 
         // load field artifacts
-        Actions.runBlocking(slurpArtifacts(drive, -0.3 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, 0.6 * gridSize));
+//        runAction(drive, limelight, slurpArtifacts(drive, -0.3 * gridSize));
         shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -0.3 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, -0.55 * gridSize));
         shoot(shooter);
         Actions.runBlocking(slurpArtifacts(drive, -1.2 * gridSize));
         shoot(shooter);
@@ -63,9 +65,16 @@ public class RedTokyoDrift extends LinearOpMode {
         intake.setPower(0);
     }
 
-
+    private void runAction(MecanumDrive drive, Limelight limelight, Action trajectoryAction) {
+        boolean running = true;
+        while (opModeIsActive() && running) {
+            drive.updatePoseEstimate();
+            limelight.updatePose(drive, telemetry);
+            running = trajectoryAction.run(new TelemetryPacket());
+        }
+    }
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
-        double wallX = (2.05 * gridSize);
+        double wallX = (2.0 * gridSize);
         if (posY < 0.2 * gridSize){
             wallX = (2.25 * gridSize);
         }

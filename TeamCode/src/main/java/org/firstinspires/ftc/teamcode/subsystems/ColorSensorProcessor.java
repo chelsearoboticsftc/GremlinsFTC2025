@@ -24,7 +24,7 @@ public class ColorSensorProcessor {
 
     // Minimum saturation and value to be considered a color
     private static final float MIN_SATURATION = 0.2f;
-    private static final float MIN_VALUE = 0.2f;
+    private static final float MIN_VALUE = 1f;
 
 
     // hsvValues is an array that will hold the hue, saturation, and value information.

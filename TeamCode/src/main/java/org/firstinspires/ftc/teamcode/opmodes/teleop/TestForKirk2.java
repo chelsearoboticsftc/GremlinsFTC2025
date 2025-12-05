@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.example.SmartShooter;
 
-
+@Disabled
 @TeleOp
 public class TestForKirk2 extends LinearOpMode {
     @Override
