@@ -70,8 +70,8 @@ public class RedNearAuton2 extends LinearOpMode {
                 .turnTo(Math.toRadians(0))
                 .lineToX(2.3 * gridSize)
                 .setReversed(true)
-                .lineToX(0.8 * gridSize)
-                .turnTo(Math.toRadians(-90))
+
+
                 .lineToY(1.2 * gridSize)
                 .turnTo(startingPos.heading.toDouble())
                 .lineToX(startingPos.position.x)

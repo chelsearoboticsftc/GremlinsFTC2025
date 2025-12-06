@@ -23,27 +23,28 @@ public class MeepMeepTesting {
                 .setConstraints(50, 50, Math.toRadians(180), Math.toRadians(180), 15)
                 .build();
 
-        final Pose2d startingPos = new Pose2d(-2 * gridSize, 2.2 * gridSize, Math.toRadians(-36));
-        final double posY = 0.5 * gridSize;
+        final Pose2d startingPos = new Pose2d(-0.7 * gridSize, -2.667 * gridSize, Math.toRadians(90));
+        final double posY = 2.3 * gridSize;
 
-        double wallX = -(2.1 * gridSize);
+        double wallX = (2.0 * gridSize);
         if (posY < 0.2 * gridSize){
-        wallX = -(2.3 * gridSize);
+        wallX = (2.3 * gridSize);
         }
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
-                .splineToLinearHeading(
-                        new Pose2d(-1 * gridSize, posY + 4, Math.toRadians(180)),
-                        Math.toRadians(-90)
-                )
+                .splineToLinearHeading(new Pose2d(-2 * gridSize, 2.3 * gridSize, Math.toRadians(-37)), Math.toRadians(180))
                 .setTangent(Math.toRadians(180))
-                .splineTo(new Vector2d(wallX, posY), Math.toRadians(215))
-                .setTangent(Math.toRadians(0))
-                .lineToX((startingPos.position.x) + 3)
-                .setTangent(Math.toRadians(90))
-                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
+                .lineToX(-0.5 * gridSize)
+                .turnTo(Math.toRadians(-90))
+                .lineToY(-1.5 * gridSize)
+                .turnTo(Math.toRadians(180))
+                .lineToX(-2.5 * gridSize)
+                .turnTo(Math.toRadians(180))
+                .lineToX(-1.5 * gridSize)
+                .splineToLinearHeading(new Pose2d(-2 * gridSize, 2.3 * gridSize, Math.toRadians(-37)), Math.toRadians(180))
                 .setTangent(Math.toRadians(180))
-                .lineToX(startingPos.position.x)
-
+                .lineToX(-0.5 * gridSize)
+                .turnTo(Math.toRadians(-90))
+                .lineToY(-1.5 * gridSize)
                 .build()
         );
 

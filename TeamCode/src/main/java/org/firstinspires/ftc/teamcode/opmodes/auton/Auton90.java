@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.opmodes.auton;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+@Disabled
 @Autonomous
 public class Auton90 extends LinearOpMode {
     @Override
@@ -26,5 +28,10 @@ public class Auton90 extends LinearOpMode {
                         .turn(Math.toRadians(90))
                         .build()
         );
+    }
+
+    @Override
+    public double getRuntime() {
+        return super.getRuntime();
     }
 }

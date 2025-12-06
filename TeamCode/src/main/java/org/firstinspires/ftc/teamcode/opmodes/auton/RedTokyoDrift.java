@@ -45,19 +45,17 @@ public class RedTokyoDrift extends LinearOpMode {
         shoot(shooter);
 
         // load field artifacts
-        Actions.runBlocking(slurpArtifacts(drive, 0.6 * gridSize));
-//        runAction(drive, limelight, slurpArtifacts(drive, -0.3 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, 0.5 * gridSize));
         shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -0.55 * gridSize));
-        shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -1.2 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, -0.6 * gridSize));
         shoot(shooter);
 
         // leave line
         Actions.runBlocking(
-            drive.actionBuilder(startingPos)
-            .splineTo(new Vector2d(1.5 * gridSize, 0), Math.toRadians(-90))
-            .build()
+                drive.actionBuilder(startingPos)
+                        .setTangent(Math.toRadians(-90))
+                        .lineToY(0)
+                        .build()
         );
 
         // turn off intake and flywheel
@@ -73,6 +71,7 @@ public class RedTokyoDrift extends LinearOpMode {
             running = trajectoryAction.run(new TelemetryPacket());
         }
     }
+
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
         double wallX = (2.0 * gridSize);
         if (posY < 0.2 * gridSize){
@@ -80,13 +79,13 @@ public class RedTokyoDrift extends LinearOpMode {
         }
         return drive.actionBuilder(drive.localizer.getPose())
                 .splineToLinearHeading(
-                        new Pose2d(1 * gridSize, posY, Math.toRadians(0)),
+                        new Pose2d(1 * gridSize, posY + 3, Math.toRadians(0)),
                         Math.toRadians(-90)
                 )
-                .setTangent(Math.toRadians(180))
-                .lineToX(wallX)
                 .setTangent(Math.toRadians(0))
-                .lineToX((startingPos.position.x) - 3)
+                .splineTo(new Vector2d(wallX, posY - 2), Math.toRadians(-15))
+                .setTangent(Math.toRadians(0))
+                .lineToX((startingPos.position.x) - 6)
                 .setTangent(Math.toRadians(90))
                 .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
                 .setTangent(Math.toRadians(180))
