@@ -31,20 +31,14 @@ public class MeepMeepTesting {
         wallX = (2.3 * gridSize);
         }
         myBot.runAction(myBot.getDrive().actionBuilder(startingPos)
-                .splineToLinearHeading(new Pose2d(-2 * gridSize, 2.3 * gridSize, Math.toRadians(-37)), Math.toRadians(180))
                 .setTangent(Math.toRadians(180))
-                .lineToX(-0.5 * gridSize)
-                .turnTo(Math.toRadians(-90))
-                .lineToY(-1.5 * gridSize)
-                .turnTo(Math.toRadians(180))
-                .lineToX(-2.5 * gridSize)
-                .turnTo(Math.toRadians(180))
-                .lineToX(-1.5 * gridSize)
-                .splineToLinearHeading(new Pose2d(-2 * gridSize, 2.3 * gridSize, Math.toRadians(-37)), Math.toRadians(180))
+                .splineTo(new Vector2d(wallX, posY - 2), Math.toRadians(195))
+                .setTangent(Math.toRadians(0))
+                .lineToX((startingPos.position.x) + 6)
+                .setTangent(Math.toRadians(90))
+                .lineToYLinearHeading(startingPos.position.y, startingPos.heading)
                 .setTangent(Math.toRadians(180))
-                .lineToX(-0.5 * gridSize)
-                .turnTo(Math.toRadians(-90))
-                .lineToY(-1.5 * gridSize)
+                .lineToX(startingPos.position.x)
                 .build()
         );
 
