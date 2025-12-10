@@ -28,8 +28,6 @@ public class BlueTokyoDrift extends LinearOpMode {
         SmartShooter shooter = new SmartShooter(hardwareMap);
         DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
         DcMotorEx intake2 = hardwareMap.get(DcMotorEx.class, "intake2");
-        Limelight limelight = new Limelight(hardwareMap);
-
 
         // Wait for the driver to press start
         waitForStart();
@@ -47,7 +45,7 @@ public class BlueTokyoDrift extends LinearOpMode {
         // load field artifacts
         Actions.runBlocking(slurpArtifacts(drive, 0.5 * gridSize));
         shoot(shooter);
-        Actions.runBlocking(slurpArtifacts(drive, -0.6 * gridSize));
+        Actions.runBlocking(slurpArtifacts(drive, -0.4 * gridSize));
         shoot(shooter);
 
         // leave line
@@ -63,19 +61,10 @@ public class BlueTokyoDrift extends LinearOpMode {
         intake.setPower(0);
     }
 
-    private void runAction(MecanumDrive drive, Limelight limelight, Action trajectoryAction) {
-        boolean running = true;
-        while (opModeIsActive() && running) {
-            drive.updatePoseEstimate();
-            limelight.updatePose(drive, telemetry);
-            running = trajectoryAction.run(new TelemetryPacket());
-        }
-    }
-
     private Action slurpArtifacts(MecanumDrive drive, double posY) {
         double wallX = (-2.0 * gridSize);
         if (posY < 0.2 * gridSize){
-            wallX = (-2.25 * gridSize);
+            wallX = (-2.7 * gridSize);
         }
         return drive.actionBuilder(drive.localizer.getPose())
                 .splineToLinearHeading(
