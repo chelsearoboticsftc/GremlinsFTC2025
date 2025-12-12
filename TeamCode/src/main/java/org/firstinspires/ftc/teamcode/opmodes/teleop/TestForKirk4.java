@@ -146,7 +146,7 @@ public class TestForKirk4 extends LinearOpMode {
             for (Limelight.TagDetection detection : limelight.getCurrentDetections()) {
                 telemetry.addData("Detection", detection.toString());
             }
-            limelight.updatePose(drive, this.telemetry);
+
             telemetry.update();
         }
     }

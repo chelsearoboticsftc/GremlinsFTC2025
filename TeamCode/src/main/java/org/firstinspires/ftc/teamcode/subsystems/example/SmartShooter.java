@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.subsystems.ColorSensorProcessor;
 import org.firstinspires.ftc.teamcode.utils.LookupTable;
 
 public class SmartShooter {
@@ -14,6 +15,10 @@ public class SmartShooter {
     DcMotorEx motor;
     Servo upperLeftGate;
     Servo upperRightGate;
+
+    ColorSensorProcessor colorSensorLeft;
+    ColorSensorProcessor colorSensorRight;
+
 
     //Declare any other global variables for this class here
     private final LookupTable distanceToVelocity = new LookupTable(SmartShooterConstants.LOOKUP_TABLE);
@@ -24,6 +29,9 @@ public class SmartShooter {
         this.upperLeftGate = hardwareMap.get(Servo.class, "upperLeftGate");
         this.upperRightGate = hardwareMap.get(Servo.class, "upperRightGate");
         this.upperRightGate.setDirection(Servo.Direction.REVERSE);
+        this.colorSensorLeft = new ColorSensorProcessor(hardwareMap, "colorSensorLeft");
+        this.colorSensorRight = new ColorSensorProcessor(hardwareMap, "colorSensorRight");
+
         this.lowerGates();
 
         //This defines the behavior at zero power (brake or coast)
@@ -114,6 +122,24 @@ public class SmartShooter {
         } catch (InterruptedException e) {
         }
         this.motor.setVelocity(0);
+        this.lowerGates();
+    }
+
+    public void shootColor(ColorSensorProcessor.DetectedColor color) {
+        if (
+                (colorSensorLeft.getDetectedColor() == color) |
+                // always raise left if there's nothing in right
+                (colorSensorRight.getDetectedColor() == ColorSensorProcessor.DetectedColor.NONE)
+        ) {
+            this.raiseLeftGate();
+        } else {
+            this.raiseRightGate();
+        }
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.lowerGates();
     }
 
